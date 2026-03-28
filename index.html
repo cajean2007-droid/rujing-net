@@ -346,17 +346,26 @@
 
         var map = new BMap.Map('company-map-container');
         map.centerAndZoom(new BMap.Point(bd.lng, bd.lat), 15);
-        map.setMapStyleV2({ styleId: 'dark' });
+        map.setMapStyleV2({ styleId: 'bedb143ca3de5d5a96405f3885d5d204' });
         map.enableScrollWheelZoom(false);
 
-        // 自定义金色图钉
-        var markerIcon = new BMap.Icon(
-          'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40"><path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 24 16 24s16-12 16-24C32 7.163 24.837 0 16 0z" fill="#C9A84C"/><circle cx="16" cy="16" r="7" fill="#0A0A0F"/></svg>'),
-          new BMap.Size(32, 40),
-          { anchor: new BMap.Size(16, 40), imageSize: new BMap.Size(32, 40) }
-        );
-        var marker = new BMap.Marker(new BMap.Point(bd.lng, bd.lat), { icon: markerIcon });
+        // 自定义金色图钉（用百度默认图标叠加颜色层）
+        var marker = new BMap.Marker(new BMap.Point(bd.lng, bd.lat));
         map.addOverlay(marker);
+
+        // 给 marker 叠加金色圆点
+        var label = new BMap.Label('', {
+          offset: new BMap.Size(-8, -8),
+          position: new BMap.Point(bd.lng, bd.lat)
+        });
+        label.setStyle({
+          width: '16px', height: '16px',
+          background: '#C9A84C',
+          borderRadius: '50%',
+          border: '2px solid #18181F',
+          boxShadow: '0 4px 16px rgba(201,168,76,0.4)',
+        });
+        map.addOverlay(label);
 
         // 高德导航链接（保留）
         var navUrl = 'https://uri.amap.com/navigation?to=' + wgsLng + ',' + wgsLat + ',时述智能&mode=car&callnative=1';
