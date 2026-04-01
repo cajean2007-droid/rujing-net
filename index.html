@@ -1,160 +1,384 @@
-<!DOCTYPE html>
-<html lang="zh-CN>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>时述智能 inshot | 让好故事开机</title>
-<meta name="description" content="时述智能（inshot入镜）是一家面向短剧集与长篇视频内容生产的AI制片平台。基于StoryClaw架构，让好故事开机。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:#0A0A0F;color:#F5F0E6;overflow-x:hidden;position:relative}body::before{content:'';position:fixed;inset:0;z-index:0;background-image:radial-gradient(circle at 20% 20%,rgba(201,168,76,0.03) 0%,transparent 50%),radial-gradient(circle at 80% 60%,rgba(201,168,76,0.025) 0%,transparent 40%),radial-gradient(circle at 50% 80%,rgba(201,168,76,0.02) 0%,transparent 35%);pointer-events:none}body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.035;background-image:radial-gradient(circle 1px at center,rgba(201,168,76,0.5) 0%,transparent 100%);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 70%)}::selection{background:#C9A84C;color:#0A0A0F}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 64px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.88);backdrop-filter:blur(28px);border-bottom:1px solid rgba(201,168,76,0.12)}.nav-logo{font-size:22px;font-weight:800;color:#fff}.nav-logo span{color:#C9A84C}.nav-links{display:flex;gap:40px;list-style:none;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:#9A9590;transition:color 0.2s}.nav-links a:hover{color:#C9A84C}.nav-cta{padding:10px 24px;background:#C9A84C;color:#0A0A0F;border-radius:8px;font-weight:700;font-size:14px}.nav-cta:hover{background:#E2C274}.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 64px 80px}.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(201,168,76,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 70%,rgba(201,168,76,0.04) 0%,transparent 50%),linear-gradient(160deg,#0A0A0F 0%,#111118 60%,#0D0D14 100%)}.hero-lines{position:absolute;inset:0;z-index:1;opacity:0.025;background-image:linear-gradient(rgba(201,168,76,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.6) 1px,transparent 1px);background-size:100px 100px}.hero-content{position:relative;z-index:2;max-width:880px}.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;padding:7px 18px;border-radius:100px;border:1px solid rgba(201,168,76,0.35);background:rgba(201,168,76,0.06);margin-bottom:40px}.hero-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:#C9A84C}.hero h1{font-size:clamp(52px,8vw,88px);font-weight:800;line-height:1.05;letter-spacing:-0.025em;margin-bottom:28px}.hero h1 span{color:#C9A84C}.hero-desc{font-size:17px;color:#D4CFCA;line-height:1.85;max-width:560px;margin-bottom:48px;font-weight:300}.hero-desc strong{color:#fff;font-weight:600}.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:#C9A84C;color:#0A0A0F;border-radius:10px;font-weight:700;font-size:15px;transition:all 0.25s;border:none}.btn-gold:hover{background:#E2C274;transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,168,76,0.22)}.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:transparent;color:#9A9590;border-radius:10px;font-weight:500;font-size:15px;border:1px solid rgba(245,240,230,0.15);transition:all 0.25s}.btn-outline:hover{border-color:#C9A84C;color:#C9A84C;background:rgba(201,168,76,0.04)}.hero-metrics{display:flex;gap:56px;margin-top:80px;padding-top:48px;border-top:1px solid rgba(245,240,230,0.06)}.hero-metric-num{font-size:38px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px}.hero-metric-num span{color:#C9A84C}.hero-metric-label{font-size:13px;color:#6B6660;font-weight:500}.marquee-section{padding:22px 0;border-top:1px solid rgba(201,168,76,0.06);border-bottom:1px solid rgba(201,168,76,0.06);background:#111118;overflow:hidden}.marquee-track{display:flex;gap:52px;width:max-content;animation:marquee 28s linear infinite}.marquee-item{font-size:12px;color:#6B6660;font-weight:500;white-space:nowrap;letter-spacing:0.08em}.marquee-item span{color:#C9A84C}@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}.section-label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px}.section-heading{font-size:clamp(34px,4.5vw,50px);font-weight:800;letter-spacing:-0.025em;line-height:1.1;margin-bottom:16px}.about{padding:120px 64px;max-width:1160px;margin:0 auto}.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:88px;align-items:start;margin-top:56px}.about-text p{font-size:15px;color:#D4CFCA;line-height:2;margin-bottom:20px;font-weight:300}.about-text strong{color:#fff;font-weight:600}.about-aside{display:flex;flex-direction:column;gap:14px}.about-card{padding:26px;border-radius:14px;background:#111118;border:1px solid rgba(201,168,76,0.12);display:flex;align-items:flex-start;gap:18px;transition:all 0.25s}.about-card:hover{border-color:rgba(201,168,76,0.35)}.about-card-icon{width:42px;height:42px;border-radius:10px;flex-shrink:0;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:18px}.about-card h4{font-size:14px;font-weight:700;margin-bottom:3px}.about-card p{font-size:12px;color:#9A9590;line-height:1.6}.product{padding:120px 64px;background:#111118}.product-inner{max-width:1160px;margin:0 auto}.product-header{text-align:center;margin-bottom:64px}.product-header p{font-size:16px;color:#9A9590;max-width:480px;margin:14px auto 0;line-height:1.8;font-weight:300}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature-card{padding:32px 28px;border-radius:18px;background:#0A0A0F;border:1px solid rgba(201,168,76,0.12);transition:all 0.3s}.feature-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.feature-card.large{grid-column:span 2}.feature-icon{width:48px;height:48px;border-radius:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(201,168,76,0.08)}.feature-card h4{font-size:16px;font-weight:700;margin-bottom:5px}.feature-card .fe{font-size:10px;font-weight:600;color:#C9A84C;margin-bottom:14px;letter-spacing:0.04em}.feature-card p{font-size:13px;color:#9A9590;line-height:1.8;font-weight:300}.metrics{padding:80px 64px;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,rgba(139,105,20,0.03) 100%);border-top:1px solid rgba(201,168,76,0.12);border-bottom:1px solid rgba(201,168,76,0.12)}.metrics-inner{max-width:1160px;margin:0 auto}.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}.metric-num{font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.03em;margin-bottom:8px}.metric-num span{color:#C9A84C}.metric-label{font-size:13px;color:#9A9590;font-weight:500}.team{padding:120px 64px}.team-inner{max-width:1160px;margin:0 auto}.team-header{text-align:center;margin-bottom:64px}.team-header p{font-size:16px;color:#9A9590;max-width:440px;margin:14px auto 0;font-weight:300}.team-ceo{display:flex;gap:48px;align-items:center;margin-bottom:52px;padding:44px;border-radius:22px;background:#111118;border:1px solid rgba(201,168,76,0.12)}.team-ceo-avatar{width:150px;height:188px;border-radius:16px;overflow:hidden;flex-shrink:0;border:2px solid rgba(201,168,76,0.12)}.team-ceo-avatar img{width:100%;height:100%;object-fit:cover}.team-ceo-info h3{font-size:26px;font-weight:800;margin-bottom:5px}.team-ceo-info .role{font-size:12px;color:#C9A84C;font-weight:600;margin-bottom:18px;letter-spacing:0.04em}.team-ceo-info p{font-size:13px;color:#D4CFCA;line-height:1.85;font-weight:300;margin-bottom:22px}.team-ceo-link{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:10px;border:1px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:13px;font-weight:600;transition:all 0.2s}.team-ceo-link:hover{background:rgba(201,168,76,0.08)}.team-section-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6B6660;margin-bottom:20px}.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.team-card{padding:26px 18px;border-radius:16px;text-align:center;background:#111118;border:1px solid rgba(201,168,76,0.12);transition:all 0.3s}.team-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.team-avatar{width:76px;height:76px;border-radius:16px;margin:0 auto 16px;overflow:hidden;border:2px solid rgba(201,168,76,0.12)}.team-avatar img{width:100%;height:100%;object-fit:cover}.team-card h4{font-size:14px;font-weight:700;margin-bottom:3px}.team-card .role{font-size:10px;color:#C9A84C;font-weight:600;margin-bottom:9px;letter-spacing:0.03em}.team-card .bio{font-size:11px;color:#9A9590;line-height:1.6;font-weight:300}.team-more{display:flex;gap:18px;justify-content:center;margin-top:48px;padding-top:48px;border-top:1px solid rgba(245,240,230,0.06)}.team-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:12px;border:1px solid rgba(201,168,76,0.35);color:#C9A84C;font-weight:700;font-size:14px;transition:all 0.25s;background:rgba(201,168,76,0.04)}.team-btn:hover{background:rgba(201,168,76,0.1);transform:translateY(-2px)}.company{padding:120px 64px;background:#111118}.company-inner{max-width:1160px;margin:0 auto}.company-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}.company-info h2{font-size:36px;font-weight:800;margin-bottom:22px}.company-info-p{font-size:15px;color:#D4CFCA;line-height:2;margin-bottom:32px;font-weight:300}.info-list{display:flex;flex-direction:column;gap:18px}.info-item{display:flex;align-items:flex-start;gap:16px}.info-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(201,168,76,0.08);display:flex;align-items:center;justify-content:center;font-size:17px}.info-item h4{font-size:13px;font-weight:700;margin-bottom:2px}.info-item p{font-size:13px;color:#9A9590}.company-map{border-radius:18px;overflow:hidden;border:1px solid rgba(201,168,76,0.12);background:linear-gradient(135deg,#18181F 0%,rgba(201,168,76,0.03) 100%);min-height:340px;display:flex;align-items:center;justify-content:center}.map-inner{text-align:center;padding:36px}.map-inner .mi{font-size:44px;margin-bottom:14px}.map-inner p{font-size:14px;color:#9A9590;margin-bottom:5px}.map-inner .gl{color:#C9A84C;font-weight:600;font-size:15px}.map-inner .sub{font-size:11px;color:#6B6660}.contact{padding:120px 64px}.contact-inner{max-width:800px;margin:0 auto;text-align:center}.contact h2{font-size:clamp(34px,4vw,50px);font-weight:800;margin-bottom:18px}.contact-p{font-size:16px;color:#9A9590;line-height:1.8;margin-bottom:48px;font-weight:300}.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:44px}.contact-card{padding:32px 24px;border-radius:18px;background:#111118;border:1px solid rgba(201,168,76,0.12);transition:all 0.25s}.contact-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.contact-card-icon{font-size:28px;margin-bottom:16px}.contact-card h4{font-size:14px;font-weight:700;margin-bottom:7px}.contact-card p{font-size:12px;color:#9A9590;line-height:1.7}.contact-card a{color:#C9A84C}.wechat-section{padding:40px;border-radius:18px;background:#111118;border:1px solid rgba(201,168,76,0.12)}.wechat-section h4{font-size:15px;font-weight:700;margin-bottom:22px}.wechat-row{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}.wechat-qr-box{width:120px;height:120px;border-radius:14px;overflow:hidden;border:2px solid rgba(201,168,76,0.12)}.wechat-qr-box img{width:100%;height:100%;object-fit:cover}.wechat-tips{text-align:left}.wechat-tips p{font-size:13px;color:#9A9590;margin-bottom:7px;font-weight:300}.wechat-tips p strong{color:#C9A84C;font-weight:600}footer{padding:44px 64px;border-top:1px solid rgba(245,240,230,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}.footer-logo{font-size:17px;font-weight:800;color:#fff}.footer-logo span{color:#C9A84C}footer p{font-size:12px;color:#6B6660}footer a{color:#6B6660;text-decoration:none;margin-left:26px;font-size:12px;transition:color 0.2s}footer a:hover{color:#C9A84C}@media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:44px}.team-ceo{flex-direction:column;text-align:center}.team-grid{grid-template-columns:repeat(2,1fr)}.company-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}.feature-card.large{grid-column:span 2}}@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:100px 20px 60px}.hero-metrics{flex-direction:column;gap:24px}.about,.product,.metrics,.team,.company,.contact{padding:80px 20px}.metrics-grid{grid-template-columns:repeat(2,1fr);gap:28px}.contact-cards{grid-template-columns:1fr}.footer{padding:32px 20px;flex-direction:column;text-align:center}.footer a{margin:7px 10px}}}
-</style>
-</head>
-<body>
-<svg style="position:absolute;width:0;height:0" xmlns="http://www.w3.org/2000/svg"><defs><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs></svg>
-<nav>
-<a href="/" class="nav-logo">inshot<span>.</span></a>
-<ul class="nav-links">
-<li><a href="#about">我们是谁</a></li>
-<li><a href="#product">产品</a></li>
-<li><a href="#team">团队</a></li>
-<li><a href="#company">公司</a></li>
-<li><a href="#contact" class="nav-cta">联系我们</a></li>
-</ul>
-</nav>
-<section class="hero">
-<div class="hero-bg"></div>
-<div class="hero-lines"></div>
-<div class="hero-content">
-<div class="hero-eyebrow">AI Native Film Production Platform</div>
-<h1>让好故事<span>开机</span></h1>
-<p class="hero-desc">时述智能（inshot 入镜）是一家面向<strong>短剧集与长篇视频内容生产</strong>的 AI 制片平台。<br>基于 StoryClaw 架构，从灵感到成片，一站式完成。</p>
-<div class="hero-actions">
-<a href="#product" class="btn-gold">了解产品 →</a>
-<a href="#contact" class="btn-outline">联系团队</a>
-</div>
-<div class="hero-metrics">
-<div><div class="hero-metric-num"><span>-</span>95%</div><div class="hero-metric-label">制作成本降低</div></div>
-<div><div class="hero-metric-num"><span>53</span>×</div><div class="hero-metric-label">制作周期提效</div></div>
-<div><div class="hero-metric-num"><span>300</span>万</div><div class="hero-metric-label">AI 创作者净增量预测</div></div>
-</div>
-</div>
-</section>
-<div class="marquee-section">
-<div class="marquee-track">
-<span class="marquee-item"><span>×</span>短剧集 AI 制片</span><span class="marquee-item"><span>×</span>StoryClaw 架构</span><span class="marquee-item"><span>×</span>多智能体协同</span><span class="marquee-item"><span>×</span>数字资产管理</span><span class="marquee-item"><span>×</span>剧本结构化工作流</span><span class="marquee-item"><span>×</span>AI 漫剧生成</span><span class="marquee-item"><span>×</span>短剧集 AI 制片</span><span class="marquee-item"><span>×</span>StoryClaw 架构</span><span class="marquee-item"><span>×</span>多智能体协同</span><span class="marquee-item"><span>×</span>数字资产管理</span><span class="marquee-item"><span>×</span>剧本结构化工作流</span><span class="marquee-item"><span>×</span>AI 漫剧生成</span>
-</div>
-</div>
-<section class="about" id="about">
-<div class="section-label">About Us</div>
-<h2 class="section-heading">影视工业化<br>变革期已经到来</h2>
-<div class="about-grid">
-<div class="about-text">
-<p>不是某个模型改变了影视，而是<strong>供给、效率、需求和创作主体</strong>同时变化，决定了影视生产不可能继续沿用旧的生产方式。</p>
-<p>精品短剧成本约 <strong>1–2 万元/分钟</strong>，AI 真人短剧约 <strong>1,000 元/分钟</strong>，AI 漫剧最低 <strong>500 元/分钟</strong>——成本降超百倍，能力还在持续刷新。</p>
-<p>行业缺位的不是更强的模型，而是一套<strong>面向影视生产的智能制片系统</strong>。这正是入镜在做的事。</p>
-</div>
-<div class="about-aside">
-<div class="about-card"><div class="about-card-icon>⚡</div><div><h4>供给侧：成本降超百倍</h4><p>视频模型高频迭代，API 定价持续下探，产业化条件成熟</p></div></div><div class="about-card"><div class="about-card-icon>🎯</div><div><h4>效率侧：工业级别量产</h4><p>制作周期 40 工时 → 0.75 工时，综合成本降低超 100 倍</p></div></div><div class="about-card"><div class="about-card-icon>👥</div><div><h4>就业侧：创作权扩散</h4><p>创作权正从少数专业团队扩展到更广泛的人机协同创作者</p></div></div>
-</div>
-</div>
-</section>
-<section class="product" id="product">
-<div class="product-inner">
-<div class="product-header">
-<div class="section-label">Product</div>
-<h2 class="section-heading">StoryClaw 工作台</h2>
-<p>单界面 · 全流程 · 零切换。通过一次连续交互，就能从灵感到成片。</p>
-</div>
-<div class="feature-grid">
-<div class="feature-card large"><div class="feature-icon">🧠</div><h4>全局协同中枢</h4><div class="fe">Global Command Hub</div><p>可视化监控多 Agent 协作状态，实时预警逻辑冲突，统筹团队权限与项目进度。适配全角色自然工作流，为编剧、导演、制片提供定制化视角。</p></div><div class="feature-card"><div class="feature-icon">📝</div><h4>结构化创作流</h4><div class="fe">Structured Creation Pipeline</div><p>选题、角色、剧情三大专属 Agent 驱动，将抽象灵感自动转化为标准化的世界观与剧本数据。</p></div><div class="feature-card"><div class="feature-icon">🎬</div><h4>多模态生成工厂</h4><div class="fe">Multimodal Generation Factory</div><p>并行调度专家 Agent 集群，支持局部重绘、参数微调与多版本对比优选。</p></div><div class="feature-card"><div class="feature-icon">🗺️</div><h4>动态故事画布</h4><div class="fe">Dynamic Story Canvas</div><p>节点图谱呈现全片逻辑，展示镜头间 A2A 协作链路、版本迭代树及校验状态。</p></div><div class="feature-card"><div class="feature-icon">📦</div><h4>智能资产控制台</h4><div class="fe">Smart Asset Console</div><p>基于当前场景上下文精准推荐数字资产，一键注入，实现"所荐即所用"。</p></div><div class="feature-card large"><div class="feature-icon">⏱️</div><h4>非线性交付时间轴</h4><div class="fe">Non-linear Delivery Timeline</div><p>支持并行生产、异步交付，突破传统线性流程的效率瓶颈。集成视频、音频与元数据日志，一键输出多格式成片与分发素材。</p></div>
-</div>
-</div>
-</section>
-<section class="metrics">
-<div class="metrics-inner">
-<div class="metrics-grid">
-<div><div class="metric-num"><span>-</span>95%</div><div class="metric-label">制作成本降低</div></div>
-<div><div class="metric-num"><span>53</span>×</div><div class="metric-label">制作周期提效</div></div>
-<div><div class="metric-num"><span>125</span>×</div><div class="metric-label">综合成本降低</div></div>
-<div><div class="metric-num"><span>300</span>万+</div><div class="metric-label">AI 创作者净增量预测</div></div>
-</div>
-</div>
-</section>
-<section class="team" id="team">
-<div class="team-inner">
-<div class="team-header">
-<div class="section-label">Team</div>
-<h2 class="section-heading">核心团队</h2>
-<p>完整经历内容行业变迁的跨界团队，技术与内容双核驱动</p>
-</div>
-<div class="team-ceo">
-<div class="team-ceo-avatar"><img src="images/marui.jpg" alt="马睿"></div>
-<div class="team-ceo-info">
-<h3>马睿</h3>
-<div class="role">Founder & CEO</div>
-<p>内容运营专家、媒体人、制片人、创业者，深耕互联网内容行业 11 年。擅长多业务管理，涉及综艺制作、短视频运营、短剧制作开发、电影电视剧出品制作、MCN 红人孵化。</p>
-<a href="ceo.html" class="team-ceo-link">详细介绍 →</a>
-</div>
-</div>
-<div class="team-section-label">其他核心成员</div>
-<div class="team-grid">
-<div class="team-card"><div class="team-avatar"><img src="images/team-2.jpg" alt="徐明强 博士"></div><h4>徐明强 博士</h4><div class="role">CTO</div><p class="bio">前微软中国 CTO，专注 AI 系统工程与云平台架构</p></div><div class="team-card"><div class="team-avatar"><img src="images/team-3.jpg" alt="Alex"></div><h4>Alex</h4><div class="role">VP of AI Engineering</div><p class="bio">微软全球资深 AI 架构师，OpenAI 专家</p></div><div class="team-card"><div class="team-avatar"><img src="images/team-4.jpg" alt="万晨"></div><h4>万晨</h4><div class="role">Chief Content Officer</div><p class="bio">前腾讯 S 级短剧制片人、导演</p></div><div class="team-card"><div class="team-avatar"><img src="images/team-5.jpg" alt="柳若昕"></div><h4>柳若昕</h4><div class="role">Chief Narrative Architect</div><p class="bio">中戏/法国里昂二大双学位</p></div>
-</div>
-<a href="team.html" class="team-btn">查看全部团队 →</a>
-</div>
-</section>
-<section class="company" id="company">
-<div class="company-inner">
-<div class="company-grid">
-<div class="company-info">
-<div class="section-label">Company</div>
-<h2>时述智能科技有限公司</h2>
-<p class="company-info-p">时述智能科技（Inshot/入镜）成立于 2023 年，是一家面向短剧集与长篇视频内容生产的 AI-native 制片平台。致力于定义下一代影视内容生产方式，让好故事开机。</p>
-<div class="info-list">
-<div class="info-item"><div class="info-icon">📍</div><div><h4>公司地址</h4><p>北京市朝阳区姚家园东里 5 号院 1 号楼 1 单元 201</p></div></div>
-<div class="info-item"><div class="info-icon">🌐</div><div><h4>品牌网站</h4><p>www.rujing.net</p></div></div>
-<div class="info-item"><div class="info-icon">✉️</div><div><h4>联系邮箱</h4><p>contact@rujing.net</p></div></div>
-<div class="info-item"><div class="info-icon">💼</div><div><h4>主营业务</h4><p>AI 制片平台研发 · 剧本结构化工作流 · 数字资产管理</p></div></div>
-</div>
-</div>
-<div class="company-map">
-<div class="map-inner">
-<div class="mi">📍</div>
-<p class="gl">北京市朝阳区</p>
-<p>姚家园东里 5号院 1号楼1单元201</p>
-<p class="sub">（地图位置待补充</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="contact" id="contact">
-<div class="contact-inner">
-<div class="section-label">Contact</div>
-<h2>联系我们</h2>
-<p>无论你是创业者、投资人、内容创作者或行业伙伴，欢迎直接联系</p>
-<div class="wechat-section" style="max-width:500px;margin:0 auto;">
-<h4>📱 扫码添加商务微信</h4>
-<div class="wechat-row">
-<div class="wechat-qr-box"><img src="images/wechat-qr.jpg" alt="微信二维码"></div>
-<div class="wechat-tips">
-<p><strong>备注来意，快速响应</strong></p>
-<p>商务合作请注明公司/团队背景</p>
-<p>媒体采访、投资机构直接联系上述邮箱</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<footer>
-<div class="footer-logo">inshot<span>.</span></div>
-<p>© 2026 时述智能科技有限公司</p>
-<div>
-<a href="/">首页</a>
-<a href="/company.html">企业文化</a>
-<a href="#contact">联系我们</a>
-</div>
-</footer>
-</body>
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>时述智能 inshot | 让好故事开机</title>
+    <meta
+      name="description"
+      content="时述智能（inshot入镜）是一家面向短剧集与长篇视频内容生产的AI制片平台。基于StoryClaw架构，让好故事开机。"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Noto Sans SC',-apple-system,sans-serif;background:#0A0A0F;color:#F5F0E6;overflow-x:hidden;position:relative}body::before{content:'';position:fixed;inset:0;z-index:0;background-image:radial-gradient(circle at 20% 20%,rgba(201,168,76,0.03) 0%,transparent 50%),radial-gradient(circle at 80% 60%,rgba(201,168,76,0.025) 0%,transparent 40%),radial-gradient(circle at 50% 80%,rgba(201,168,76,0.02) 0%,transparent 35%);pointer-events:none}body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.035;background-image:radial-gradient(circle 1px at center,rgba(201,168,76,0.5) 0%,transparent 100%);background-size:48px 48px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 70%)}::selection{background:#C9A84C;color:#0A0A0F}a{color:inherit;text-decoration:none}img{display:block;max-width:100%}nav{position:fixed;top:0;width:100%;z-index:1000;padding:0 64px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,10,15,0.88);backdrop-filter:blur(28px);border-bottom:1px solid rgba(201,168,76,0.12)}.nav-logo{font-size:22px;font-weight:800;color:#fff}.nav-logo span{color:#C9A84C}.nav-links{display:flex;gap:40px;list-style:none;align-items:center}.nav-links a{font-size:14px;font-weight:500;color:#9A9590;transition:color 0.2s}.nav-links a:hover{color:#C9A84C}.nav-cta{padding:10px 24px;background:#C9A84C;color:#0A0A0F;border-radius:8px;font-weight:700;font-size:14px}.nav-cta:hover{background:#E2C274}.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 64px 80px}.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 70% 55% at 60% 30%,rgba(201,168,76,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 20% 70%,rgba(201,168,76,0.04) 0%,transparent 50%),linear-gradient(160deg,#0A0A0F 0%,#111118 60%,#0D0D14 100%)}.hero-lines{position:absolute;inset:0;z-index:1;opacity:0.025;background-image:linear-gradient(rgba(201,168,76,0.6) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.6) 1px,transparent 1px);background-size:100px 100px}.hero-content{position:relative;z-index:2;max-width:880px}.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;padding:7px 18px;border-radius:100px;border:1px solid rgba(201,168,76,0.35);background:rgba(201,168,76,0.06);margin-bottom:40px}.hero-eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:#C9A84C}.hero h1{font-size:clamp(52px,8vw,88px);font-weight:800;line-height:1.05;letter-spacing:-0.025em;margin-bottom:28px}.hero h1 span{color:#C9A84C}.hero-desc{font-size:17px;color:#D4CFCA;line-height:1.85;max-width:560px;margin-bottom:48px;font-weight:300}.hero-desc strong{color:#fff;font-weight:600}.hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}.btn-gold{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:#C9A84C;color:#0A0A0F;border-radius:10px;font-weight:700;font-size:15px;transition:all 0.25s;border:none}.btn-gold:hover{background:#E2C274;transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,168,76,0.22)}.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:transparent;color:#9A9590;border-radius:10px;font-weight:500;font-size:15px;border:1px solid rgba(245,240,230,0.15);transition:all 0.25s}.btn-outline:hover{border-color:#C9A84C;color:#C9A84C;background:rgba(201,168,76,0.04)}.hero-metrics{display:flex;gap:56px;margin-top:80px;padding-top:48px;border-top:1px solid rgba(245,240,230,0.06)}.hero-metric-num{font-size:38px;font-weight:800;letter-spacing:-0.03em;margin-bottom:6px}.hero-metric-num span{color:#C9A84C}.hero-metric-label{font-size:13px;color:#6B6660;font-weight:500}.marquee-section{padding:22px 0;border-top:1px solid rgba(201,168,76,0.06);border-bottom:1px solid rgba(201,168,76,0.06);background:#111118;overflow:hidden}.marquee-track{display:flex;gap:52px;width:max-content;animation:marquee 28s linear infinite}.marquee-item{font-size:12px;color:#6B6660;font-weight:500;white-space:nowrap;letter-spacing:0.08em}.marquee-item span{color:#C9A84C}@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}.section-label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#C9A84C;margin-bottom:14px}.section-heading{font-size:clamp(34px,4.5vw,50px);font-weight:800;letter-spacing:-0.025em;line-height:1.1;margin-bottom:16px}.about{padding:120px 64px;max-width:1160px;margin:0 auto}.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:88px;align-items:start;margin-top:56px}.about-text p{font-size:15px;color:#D4CFCA;line-height:2;margin-bottom:20px;font-weight:300}.about-text strong{color:#fff;font-weight:600}.about-aside{display:flex;flex-direction:column;gap:14px}.about-card{padding:26px;border-radius:14px;background:#111118;border:1px solid rgba(201,168,76,0.12);display:flex;align-items:flex-start;gap:18px;transition:all 0.25s}.about-card:hover{border-color:rgba(201,168,76,0.35)}.about-card-icon{width:42px;height:42px;border-radius:10px;flex-shrink:0;background:rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:center;font-size:18px}.about-card h4{font-size:14px;font-weight:700;margin-bottom:3px}.about-card p{font-size:12px;color:#9A9590;line-height:1.6}.product{padding:120px 64px;background:#111118}.product-inner{max-width:1160px;margin:0 auto}.product-header{text-align:center;margin-bottom:64px}.product-header p{font-size:16px;color:#9A9590;max-width:480px;margin:14px auto 0;line-height:1.8;font-weight:300}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.feature-card{padding:32px 28px;border-radius:18px;background:#0A0A0F;border:1px solid rgba(201,168,76,0.12);transition:all 0.3s}.feature-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.feature-card.large{grid-column:span 2}.feature-icon{width:48px;height:48px;border-radius:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(201,168,76,0.08)}.feature-card h4{font-size:16px;font-weight:700;margin-bottom:5px}.feature-card .fe{font-size:10px;font-weight:600;color:#C9A84C;margin-bottom:14px;letter-spacing:0.04em}.feature-card p{font-size:13px;color:#9A9590;line-height:1.8;font-weight:300}.metrics{padding:80px 64px;background:linear-gradient(135deg,rgba(201,168,76,0.05) 0%,rgba(139,105,20,0.03) 100%);border-top:1px solid rgba(201,168,76,0.12);border-bottom:1px solid rgba(201,168,76,0.12)}.metrics-inner{max-width:1160px;margin:0 auto}.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;text-align:center}.metric-num{font-size:clamp(30px,4vw,50px);font-weight:900;letter-spacing:-0.03em;margin-bottom:8px}.metric-num span{color:#C9A84C}.metric-label{font-size:13px;color:#9A9590;font-weight:500}.team{padding:120px 64px}.team-inner{max-width:1160px;margin:0 auto}.team-header{text-align:center;margin-bottom:64px}.team-header p{font-size:16px;color:#9A9590;max-width:440px;margin:14px auto 0;font-weight:300}.team-ceo{display:flex;gap:48px;align-items:center;margin-bottom:52px;padding:44px;border-radius:22px;background:#111118;border:1px solid rgba(201,168,76,0.12)}.team-ceo-avatar{width:150px;height:188px;border-radius:16px;overflow:hidden;flex-shrink:0;border:2px solid rgba(201,168,76,0.12)}.team-ceo-avatar img{width:100%;height:100%;object-fit:cover}.team-ceo-info h3{font-size:26px;font-weight:800;margin-bottom:5px}.team-ceo-info .role{font-size:12px;color:#C9A84C;font-weight:600;margin-bottom:18px;letter-spacing:0.04em}.team-ceo-info p{font-size:13px;color:#D4CFCA;line-height:1.85;font-weight:300;margin-bottom:22px}.team-ceo-link{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:10px;border:1px solid rgba(201,168,76,0.35);color:#C9A84C;font-size:13px;font-weight:600;transition:all 0.2s}.team-ceo-link:hover{background:rgba(201,168,76,0.08)}.team-section-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6B6660;margin-bottom:20px}.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.team-card{padding:26px 18px;border-radius:16px;text-align:center;background:#111118;border:1px solid rgba(201,168,76,0.12);transition:all 0.3s}.team-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.team-avatar{width:76px;height:76px;border-radius:16px;margin:0 auto 16px;overflow:hidden;border:2px solid rgba(201,168,76,0.12)}.team-avatar img{width:100%;height:100%;object-fit:cover}.team-card h4{font-size:14px;font-weight:700;margin-bottom:3px}.team-card .role{font-size:10px;color:#C9A84C;font-weight:600;margin-bottom:9px;letter-spacing:0.03em}.team-card .bio{font-size:11px;color:#9A9590;line-height:1.6;font-weight:300}.team-more{display:flex;gap:18px;justify-content:center;margin-top:48px;padding-top:48px;border-top:1px solid rgba(245,240,230,0.06)}.team-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;border-radius:12px;border:1px solid rgba(201,168,76,0.35);color:#C9A84C;font-weight:700;font-size:14px;transition:all 0.25s;background:rgba(201,168,76,0.04)}.team-btn:hover{background:rgba(201,168,76,0.1);transform:translateY(-2px)}.company{padding:120px 64px;background:#111118}.company-inner{max-width:1160px;margin:0 auto}.company-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}.company-info h2{font-size:36px;font-weight:800;margin-bottom:22px}.company-info-p{font-size:15px;color:#D4CFCA;line-height:2;margin-bottom:32px;font-weight:300}.info-list{display:flex;flex-direction:column;gap:18px}.info-item{display:flex;align-items:flex-start;gap:16px}.info-icon{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(201,168,76,0.08);display:flex;align-items:center;justify-content:center;font-size:17px}.info-item h4{font-size:13px;font-weight:700;margin-bottom:2px}.info-item p{font-size:13px;color:#9A9590}.company-map{border-radius:18px;overflow:hidden;border:1px solid rgba(201,168,76,0.12);background:linear-gradient(135deg,#18181F 0%,rgba(201,168,76,0.03) 100%);min-height:340px;display:flex;align-items:center;justify-content:center}@media(max-width:1024px){.company-map{display:block!important;min-height:unset!important;align-items:unset!important;justify-content:unset!important;width:100%;height:100%;border-radius:inherit;overflow:hidden}}@media(max-width:768px){.company-map{height:300px}}.map-inner{text-align:center;padding:36px}.map-inner .mi{font-size:44px;margin-bottom:14px}.map-inner p{font-size:14px;color:#9A9590;margin-bottom:5px}.map-inner .gl{color:#C9A84C;font-weight:600;font-size:15px}.map-inner .sub{font-size:11px;color:#6B6660}.contact{padding:120px 64px}.contact-inner{max-width:800px;margin:0 auto;text-align:center}.contact h2{font-size:clamp(34px,4vw,50px);font-weight:800;margin-bottom:18px}.contact-p{font-size:16px;color:#9A9590;line-height:1.8;margin-bottom:48px;font-weight:300}.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:44px}.contact-card{padding:32px 24px;border-radius:18px;background:#111118;border:1px solid rgba(201,168,76,0.12);transition:all 0.25s}.contact-card:hover{border-color:rgba(201,168,76,0.35);transform:translateY(-3px)}.contact-card-icon{font-size:28px;margin-bottom:16px}.contact-card h4{font-size:14px;font-weight:700;margin-bottom:7px}.contact-card p{font-size:12px;color:#9A9590;line-height:1.7}.contact-card a{color:#C9A84C}.wechat-section{padding:40px;border-radius:18px;background:#111118;border:1px solid rgba(201,168,76,0.12)}.wechat-section h4{font-size:15px;font-weight:700;margin-bottom:22px}.wechat-row{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}.wechat-qr-box{width:120px;height:120px;border-radius:14px;overflow:hidden;border:2px solid rgba(201,168,76,0.12)}.wechat-qr-box img{width:100%;height:100%;object-fit:cover}.wechat-tips{text-align:left}.wechat-tips p{font-size:13px;color:#9A9590;margin-bottom:7px;font-weight:300}.wechat-tips p strong{color:#C9A84C;font-weight:600}footer{padding:44px 64px;border-top:1px solid rgba(245,240,230,0.05);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}.footer-logo{font-size:17px;font-weight:800;color:#fff}.footer-logo span{color:#C9A84C}footer p{font-size:12px;color:#6B6660}footer a{color:#6B6660;text-decoration:none;margin-left:26px;font-size:12px;transition:color 0.2s}footer a:hover{color:#C9A84C}@media(max-width:1024px){.about-grid{grid-template-columns:1fr;gap:44px}.team-ceo{flex-direction:column;text-align:center}.team-grid{grid-template-columns:repeat(2,1fr)}.company-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}.feature-card.large{grid-column:span 2}}@media(max-width:768px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:100px 20px 60px}.hero-metrics{flex-direction:column;gap:24px}.about,.product,.metrics,.team,.company,.contact{padding:80px 20px}.metrics-grid{grid-template-columns:repeat(2,1fr);gap:28px}.contact-cards{grid-template-columns:1fr}.footer{padding:32px 20px;flex-direction:column;text-align:center}.footer a{margin:7px 10px}}#company-map-container{width:100%;height:340px;border-radius:8px;overflow:hidden}.leaflet-container{width:100%;height:100%;background:#18181F;font-family:inherit}.leaflet-popup-content-wrapper{background:#111118;color:#F5F0E6;border:1px solid rgba(201,168,76,0.2);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);padding:0}.leaflet-popup-tip{background:#111118}.leaflet-popup-content{color:#D4CFCA;font-size:13px}.leaflet-popup-content strong{color:#C9A84C}.leaflet-control-zoom a{background:#111118;color:#F5F0E6;border-color:rgba(201,168,76,0.2)}.leaflet-control-zoom a:hover{background:#18181F}.leaflet-control-attribution{background:rgba(10,10,15,0.7);color:#6B6660;font-size:10px}.leaflet-control-attribution a{color:#C9A84C}
+    </style>
+  </head>
+  <body>
+    <svg style="position: absolute; width: 0; height: 0" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="noise">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.65"
+            numOctaves="3"
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+      </defs>
+    </svg>
+    <nav>
+      <a href="/" class="nav-logo">inshot<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">我们是谁</a></li>
+        <li><a href="#product">产品</a></li>
+        <li><a href="#team">团队</a></li>
+        <li><a href="#company">公司</a></li>
+        <li><a href="#contact" class="nav-cta">联系我们</a></li>
+      </ul>
+    </nav>
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-lines"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">AI Native Film Production Platform</div>
+        <h1>让好故事<span>开机</span></h1>
+        <p class="hero-desc">
+          时述智能（inshot 入镜）是一家面向<strong>短剧集与长篇视频内容生产</strong>的 AI
+          制片平台。<br />基于 StoryClaw 架构，从灵感到成片，一站式完成。
+        </p>
+        <div class="hero-actions">
+          <a href="#product" class="btn-gold">了解产品 →</a>
+          <a href="#contact" class="btn-outline">联系团队</a>
+        </div>
+        <div class="hero-metrics">
+          <div>
+            <div class="hero-metric-num"><span>-</span>95%</div>
+            <div class="hero-metric-label">制作成本降低</div>
+          </div>
+          <div>
+            <div class="hero-metric-num"><span>53</span>×</div>
+            <div class="hero-metric-label">制作周期提效</div>
+          </div>
+          <div>
+            <div class="hero-metric-num"><span>300</span>万</div>
+            <div class="hero-metric-label">AI 创作者净增量预测</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <span class="marquee-item"><span>×</span>短剧集 AI 制片</span
+        ><span class="marquee-item"><span>×</span>StoryClaw 架构</span
+        ><span class="marquee-item"><span>×</span>多智能体协同</span
+        ><span class="marquee-item"><span>×</span>数字资产管理</span
+        ><span class="marquee-item"><span>×</span>剧本结构化工作流</span
+        ><span class="marquee-item"><span>×</span>AI 漫剧生成</span
+        ><span class="marquee-item"><span>×</span>短剧集 AI 制片</span
+        ><span class="marquee-item"><span>×</span>StoryClaw 架构</span
+        ><span class="marquee-item"><span>×</span>多智能体协同</span
+        ><span class="marquee-item"><span>×</span>数字资产管理</span
+        ><span class="marquee-item"><span>×</span>剧本结构化工作流</span
+        ><span class="marquee-item"><span>×</span>AI 漫剧生成</span>
+      </div>
+    </div>
+    <section class="about" id="about">
+      <div class="section-label">About Us</div>
+      <h2 class="section-heading">影视工业化<br />变革期已经到来</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            不是某个模型改变了影视，而是<strong>供给、效率、需求和创作主体</strong>同时变化，决定了影视生产不可能继续沿用旧的生产方式。
+          </p>
+          <p>
+            精品短剧成本约 <strong>1–2 万元/分钟</strong>，AI 真人短剧约
+            <strong>1,000 元/分钟</strong>，AI 漫剧最低
+            <strong>500 元/分钟</strong>——成本降超百倍，能力还在持续刷新。
+          </p>
+          <p>
+            行业缺位的不是更强的模型，而是一套<strong>面向影视生产的智能制片系统</strong>。这正是入镜在做的事。
+          </p>
+        </div>
+        <div class="about-aside">
+          <div class="about-card">
+            <div class="about-card-icon">⚡</div>
+            <div>
+              <h4>供给侧：成本降超百倍</h4>
+              <p>视频模型高频迭代，API 定价持续下探，产业化条件成熟</p>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">🎯</div>
+            <div>
+              <h4>效率侧：工业级别量产</h4>
+              <p>制作周期 40 工时 → 0.75 工时，综合成本降低超 100 倍</p>
+            </div>
+          </div>
+          <div class="about-card">
+            <div class="about-card-icon">👥</div>
+            <div>
+              <h4>就业侧：创作权扩散</h4>
+              <p>创作权正从少数专业团队扩展到更广泛的人机协同创作者</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="product" id="product">
+      <div class="product-inner">
+        <div class="product-header">
+          <div class="section-label">Product</div>
+          <h2 class="section-heading">StoryClaw 工作台</h2>
+          <p>单界面 · 全流程 · 零切换。通过一次连续交互，就能从灵感到成片。</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card large">
+            <div class="feature-icon">🧠</div>
+            <h4>全局协同中枢</h4>
+            <div class="fe">Global Command Hub</div>
+            <p>
+              可视化监控多 Agent
+              协作状态，实时预警逻辑冲突，统筹团队权限与项目进度。适配全角色自然工作流，为编剧、导演、制片提供定制化视角。
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h4>结构化创作流</h4>
+            <div class="fe">Structured Creation Pipeline</div>
+            <p>
+              选题、角色、剧情三大专属 Agent 驱动，将抽象灵感自动转化为标准化的世界观与剧本数据。
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h4>多模态生成工厂</h4>
+            <div class="fe">Multimodal Generation Factory</div>
+            <p>并行调度专家 Agent 集群，支持局部重绘、参数微调与多版本对比优选。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🗺️</div>
+            <h4>动态故事画布</h4>
+            <div class="fe">Dynamic Story Canvas</div>
+            <p>节点图谱呈现全片逻辑，展示镜头间 A2A 协作链路、版本迭代树及校验状态。</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h4>智能资产控制台</h4>
+            <div class="fe">Smart Asset Console</div>
+            <p>基于当前场景上下文精准推荐数字资产，一键注入，实现"所荐即所用"。</p>
+          </div>
+          <div class="feature-card large">
+            <div class="feature-icon">⏱️</div>
+            <h4>非线性交付时间轴</h4>
+            <div class="fe">Non-linear Delivery Timeline</div>
+            <p>
+              支持并行生产、异步交付，突破传统线性流程的效率瓶颈。集成视频、音频与元数据日志，一键输出多格式成片与分发素材。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="metrics">
+      <div class="metrics-inner">
+        <div class="metrics-grid">
+          <div>
+            <div class="metric-num"><span>-</span>95%</div>
+            <div class="metric-label">制作成本降低</div>
+          </div>
+          <div>
+            <div class="metric-num"><span>53</span>×</div>
+            <div class="metric-label">制作周期提效</div>
+          </div>
+          <div>
+            <div class="metric-num"><span>125</span>×</div>
+            <div class="metric-label">综合成本降低</div>
+          </div>
+          <div>
+            <div class="metric-num"><span>300</span>万+</div>
+            <div class="metric-label">AI 创作者净增量预测</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="team" id="team">
+      <div class="team-inner">
+        <div class="team-header">
+          <div class="section-label">Team</div>
+          <h2 class="section-heading">核心团队</h2>
+          <p>完整经历内容行业变迁的跨界团队，技术与内容双核驱动</p>
+        </div>
+        <div class="team-ceo">
+          <div class="team-ceo-avatar"><img src="images/marui.jpg" alt="马睿" /></div>
+          <div class="team-ceo-info">
+            <h3>马睿</h3>
+            <div class="role">Founder & CEO</div>
+            <p>
+              内容运营专家、媒体人、制片人、创业者，深耕互联网内容行业 11
+              年。擅长多业务管理，涉及综艺制作、短视频运营、短剧制作开发、电影电视剧出品制作、MCN
+              红人孵化。
+            </p>
+            <a href="ceo.html" class="team-ceo-link">详细介绍 →</a>
+          </div>
+        </div>
+        <div class="team-section-label">其他核心成员</div>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar"><img src="images/team-2.jpg" alt="徐明强 博士" /></div>
+            <h4>徐明强 博士</h4>
+            <div class="role">CTO</div>
+            <p class="bio">前微软中国 CTO，专注 AI 系统工程与云平台架构</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="images/Alex.png" alt="Alex" /></div>
+            <h4>Alex</h4>
+            <div class="role">VP of AI Engineering</div>
+            <p class="bio">微软全球资深 AI 架构师，OpenAI 专家</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="images/wanchen.png" alt="万晨" style="width:100%;height:100%;object-fit:cover;object-position:center calc(70% + 20px);" /></div>
+            <h4>万晨</h4>
+            <div class="role">Chief Content Officer</div>
+            <p class="bio">前腾讯 S 级短剧制片人、导演</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><img src="images/LiuRuoXin.png" alt="柳若昕" /></div>
+            <h4>柳若昕</h4>
+            <div class="role">Chief Narrative Architect</div>
+            <p class="bio">中戏/法国里昂二大双学位</p>
+          </div>
+        </div>
+        <a href="team.html" class="team-btn">查看全部团队 →</a>
+      </div>
+    </section>
+    <section class="company" id="company">
+      <div class="company-inner">
+        <div class="company-grid">
+          <div class="company-info">
+            <div class="section-label">Company</div>
+            <h2>时述智能科技有限公司</h2>
+            <p class="company-info-p">
+              时述智能科技（Inshot/入镜）成立于 2023 年，是一家面向短剧集与长篇视频内容生产的
+              AI-native 制片平台。致力于定义下一代影视内容生产方式，让好故事开机。
+            </p>
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div>
+                  <h4>公司地址</h4>
+                  <p>北京市朝阳区姚家园东里 5 号院 1 号楼 1 单元 201</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">🌐</div>
+                <div>
+                  <h4>品牌网站</h4>
+                  <p>www.rujing.net</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div>
+                  <h4>联系邮箱</h4>
+                  <p>wanchen@rujing.net</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">💼</div>
+                <div>
+                  <h4>主营业务</h4>
+                  <p>AI 制片平台研发 · 剧本结构化工作流 · 数字资产管理</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="company-map">
+            <div id="company-map-container" style="width:100%;height:340px;border-radius:8px;overflow:hidden"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact" id="contact">
+      <div class="contact-inner">
+        <div class="section-label">Contact</div>
+        <h2>联系我们</h2>
+        <p>无论你是创业者、投资人、内容创作者或行业伙伴，欢迎直接联系</p>
+        <div class="wechat-section" style="max-width: 500px; margin: 50px auto">
+          <h4>📱 扫码添加商务微信</h4>
+          <div class="wechat-row">
+            <div class="wechat-qr-box"><img src="images/wechat-qr.jpg" alt="微信二维码" /></div>
+            <div class="wechat-tips">
+              <p><strong>备注来意，快速响应</strong></p>
+              <p>商务合作请注明公司/团队背景</p>
+              <p>媒体采访、投资机构直接联系上述邮箱</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-logo">inshot<span>.</span></div>
+      <p>© 2026 时述智能科技有限公司</p>
+      <div>
+        <a href="/">首页</a>
+        <a href="/company.html">企业文化</a>
+        <a href="#contact">联系我们</a>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var lat = 39.943;
+        var lng = 116.5165;
+
+        var map = L.map('company-map-container', {
+          center: [lat, lng],
+          zoom: 15,
+          zoomControl: true,
+          scrollWheelZoom: false,
+          maxZoom: 19,
+        });
+
+        // 深色高对比度底图：CartoDB Dark Matter
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 20,
+        }).addTo(map);
+
+        // 标注层（道路名、地名），叠加在底图之上
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+          subdomains: 'abcd',
+          maxZoom: 20,
+          pane: 'shadowPane', // 显示在标注层上方
+        }).addTo(map);
+
+        var markerIcon = L.divIcon({
+          className: '',
+          html: '<div style="width:32px;height:32px;background:#C9A84C;border-radius:50% 50% 50% 0;transform:rotate(-45deg);border:3px solid #18181F;box-shadow:0 4px 16px rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center"><div style="transform:rotate(45deg);font-size:15px">📍</div></div>',
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -36],
+        });
+
+        var marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+
+        var navUrl = 'https://uri.amap.com/navigation?to=' + lng + ',' + lat + ',时述智能&mode=car&callnative=1';
+        var popupContent = '<div style="font-family:\'Noto Sans SC\',sans-serif;min-width:200px">' +
+          '<div style="color:#C9A84C;font-weight:700;font-size:14px;margin-bottom:6px">时述智能科技</div>' +
+          '<div style="color:#D4CFCA;font-size:12px;line-height:1.6;margin-bottom:12px">北京市朝阳区<br>姚家园东里5号院</div>' +
+          '<a href="' + navUrl + '" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:#C9A84C;color:#0A0A0F;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">🗺️ 导航到这里</a>' +
+          '</div>';
+
+        marker.bindPopup(popupContent, {
+          className: 'dark-popup',
+          maxWidth: 260,
+        }).openPopup();
+      });
+    </script>
+  </body>
 </html>
